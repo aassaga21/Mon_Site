@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Contact</title>
+  <link rel="canonical" href="https://aassaga21.github.io/Mon_porfolio/contact.html" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img
+        src="assets/images/Logo_Alexandra_ASSAGA.png"
+        alt="Logo Alexandra Assaga"
+        class="site-logo"
+      />
+      <div>
+        <div style="font-weight:800">Alexandra ASSAGA</div>
+        <div class="small" style="color:var(--muted)">Réseau • Cybersécurité • Cloud</div>
+      </div>
+    </a>
+
+    <nav class="nav-links">
+      <a data-nav href="index.html">Accueil</a>
+      <a data-nav href="about.html">À propos</a>
+      <a data-nav href="skills.html">Compétences</a>
+      <a data-nav href="projects.html">Projets</a>
+      <a data-nav href="contact.html" class="btn primary">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container grid">
+    <div class="card pad" style="grid-column: 1 / span 6">
+      <div class="kicker">Contact</div>
+      <h1>Travaillons ensemble</h1>
+      <p>
+        Envie de donner vie à une idée, de collaborer sur un projet, ou simplement d’échanger ?
+        Contacte-moi et je te réponds.
+      </p>
+
+      <div class="card pad" style="background: rgba(255,255,255,.03)">
+        <h3>Coordonnées</h3>
+        <p>
+          Email :
+          <a href="mailto:alexandra.assaga@satom.ch" style="text-decoration:underline">alexandra.assaga@satom.ch</a>
+        </p>
+        <p>
+          Numéro de téléphone :
+          <a href="tel:+33 (0) 6 22 40 91 33" style="text-decoration:underline">+33 (0) 6 22 40 91 33</a>
+        </p>
+        <div class="badges">
+          <a class="badge" href="https://github.com/aassaga21" target="_blank" rel="noopener">GitHub</a>
+          <a class="badge" href="www.linkedin.com/in/alexandra-assaga" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="card pad" style="grid-column: 7 / span 6">
+      <h2>Formulaire</h2>
+      
+
+      <form onsubmit="sendMail(event)">
+        <div>
+          <label for="name">Nom</label>
+          <input id="name" name="name" type="text" placeholder="Ton Nom" required />
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" placeholder="ton@email.com" required />
+        </div>
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="Bonjour, ..." required></textarea>
+        </div>
+
+        <button class="btn primary" type="submit">Envoyer</button>
+      </form>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+<footer>
+  <div class="container footer-row">
+    <div>© <span id="year"></span> Alexandra ASSAGA — Portfolio</div>
+    <div class="small">
+      <a href="contact.html" style="text-decoration:underline">Contact</a> •
+      <a href="https://github.com/aassaga21" target="_blank" rel="noopener" style="text-decoration:underline">GitHub</a> •
+      <a href="https://www.linkedin.com/in/alexandra-assaga/" target="_blank" rel="noopener" style="text-decoration:underline">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+</body>
+</html>

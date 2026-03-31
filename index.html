@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Alexandra ASSAGA</title>
+  <meta name="description" content="Portfolio d'Alexandra ASSAGA — Réseau, Cybersécurité, Cloud. Projets, compétences, contact, CV." />
+  <link rel="canonical" href="https://aassaga21.github.io/Mon_porfolio/" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container nav">
+    <a class="brand" href="index.html" aria-label="Retour à l'accueil">
+      <img src="assets/images/Logo_Alexandra_ASSAGA.png" alt="Logo Alexandra Assaga" class="site-logo" />
+      <div class="brand-text">
+        <div class="brand-name">Alexandra ASSAGA</div>
+        <div class="small muted">Réseau • Cybersécurité • Cloud</div>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a data-nav href="index.html">Accueil</a>
+      <a data-nav href="about.html">À propos</a>
+      <a data-nav href="skills.html">Compétences</a>
+      <a data-nav href="projects.html">Projets</a>
+      <a data-nav href="contact.html" class="btn primary">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container grid">
+      <div class="hero-left">
+        <div class="kicker">Disponible pour stage / junior</div>
+
+        <h1 class="hero-title">
+          J’aide les équipes à livrer une infrastructure <span class="hl">fiable</span>,
+          <span class="hl">sécurisée</span> et <span class="hl">documentée</span>.
+        </h1>
+
+        <p class="hero-sub">
+          Étudiante en informatique (Réseau / Cybersécurité / Cloud). J’aime partir d’un besoin concret,
+          proposer une solution claire, puis la déployer proprement avec tests, supervision et documentation.
+        </p>
+
+        <div class="badges hero-badges" aria-label="Technologies clés">
+          <span class="badge">VPN</span>
+          <span class="badge">OPNsense / pfSense</span>
+          <span class="badge">Fortinet</span>
+          <span class="badge">Proxmox / Hyper‑V</span>
+          <span class="badge">Terraform / Ansible</span>
+          <span class="badge">Grafana / Zabbix</span>
+        </div>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="projects.html">Voir mes projets</a>
+          <a class="btn" href="skills.html">Voir mes compétences</a>
+          <a class="btn success" href="assets/files/CV_ALEXANDRA_ASSAGA.pdf" target="_blank" rel="noopener">Télécharger mon CV</a>
+        </div>
+
+        <div class="stats" aria-label="Points forts">
+          <div class="grid">
+            <div class="stat" style="grid-column: span 4">
+              <strong>Rigueur</strong>
+              <span>Documentation & livrables exploitables</span>
+            </div>
+            <div class="stat" style="grid-column: span 4">
+              <strong>Sécurité</strong>
+              <span>Segmentation, VPN, firewall, bonnes pratiques</span>
+            </div>
+            <div class="stat" style="grid-column: span 4">
+              <strong>Production</strong>
+              <span>Monitoring, automatisation, approche “maintenable”</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="card avatar">
+          <img src="assets/images/Photo_Alexandra_ASSAGA.png" alt="Photo de Alexandra ASSAGA" loading="lazy" />
+        </div>
+
+        <div class="card pad" style="margin-top:14px">
+          <h3>Actuellement</h3>
+          <p>
+            À la recherche d’une opportunité <strong>stage / junior</strong> orientée
+            <strong>réseau</strong>, <strong>cloud</strong> et <strong>cybersécurité</strong>.
+          </p>
+          <div class="badges">
+            <span class="badge">Genève • Suisse</span>
+            <span class="badge">Mobilité possible</span>
+            <span class="badge">Disponible</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE + RECENT PROJECTS -->
+  <section class="section">
+    <div class="container grid">
+      <section class="card pad" style="grid-column: 1 / span 6">
+        <h2>Ce que je peux apporter</h2>
+        <p>
+          Une approche structurée : analyse → architecture → implémentation → tests → supervision → documentation.
+          Objectif : des solutions <strong>robustes</strong>, <strong>sécurisées</strong> et <strong>maintenables</strong>.
+        </p>
+
+        <div class="badges" style="margin-top:12px">
+          <span class="badge">Sécurité by design</span>
+          <span class="badge">Documentation</span>
+          <span class="badge">Automatisation</span>
+          <span class="badge">Supervision</span>
+          <span class="badge">Communication</span>
+        </div>
+      </section>
+
+      <section class="card pad" style="grid-column: 7 / span 6">
+        <div class="section-title">
+          <h2>Projets récents</h2>
+        </div>
+
+        <div class="cards-3">
+          <article class="card project-mini" style="background: rgba(255,255,255,.03)">
+            <h3>Hackathon NoCode 2025</h3>
+            <p>Infra multi‑sites sécurisée, VPN IPsec (Fortinet), segmentation, Proxmox + NAS.</p>
+            <div class="meta">
+              <span class="badge">Fortinet</span><span class="badge">VPN IPsec</span><span class="badge">Proxmox</span>
+            </div>
+          </article>
+
+          <article class="card project-mini" style="background: rgba(255,255,255,.03)">
+            <h3>Virtualisation & supervision</h3>
+            <p>Hyper‑V, HA/Live Migration, Prometheus + Grafana, supervision exploitable.</p>
+            <div class="meta">
+              <span class="badge">Hyper‑V</span><span class="badge">Prometheus</span><span class="badge">Grafana</span>
+            </div>
+          </article>
+
+          <article class="card project-mini" style="background: rgba(255,255,255,.03)">
+            <h3>Cloud Azure (TP final)</h3>
+            <p>VNet segmenté, VMs Linux, Azure Files SMB, accès admin via Bastion.</p>
+            <div class="meta">
+              <span class="badge">Azure</span><span class="badge">VNet</span><span class="badge">Bastion</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="hero-cta" style="margin-top:14px">
+          <a class="btn primary" href="projects.html">Voir tous mes projets</a>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="card cta-band">
+        <h2 style="margin-bottom:8px">Besoin d’un profil motivé et rigoureux ?</h2>
+        <p style="margin-bottom:14px">
+          Je peux contribuer sur des sujets réseau, cloud et cybersécurité : VPN/firewall, virtualisation,
+          supervision, automatisation, documentation.
+        </p>
+        <div class="hero-cta" style="margin-top:0">
+          <a class="btn primary" href="contact.html">Me contacter</a>
+          <a class="btn" href="assets/files/CV_ALEXANDRA_ASSAGA.pdf" target="_blank" rel="noopener">Voir mon CV</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div>© <span id="year"></span> Alexandra ASSAGA — Portfolio</div>
+    <div class="small">
+      <a href="contact.html" style="text-decoration:underline">Contact</a> •
+      <a href="https://github.com/aassaga21" target="_blank" rel="noopener" style="text-decoration:underline">GitHub</a> •
+      <a href="https://www.linkedin.com/in/alexandra-assaga/" target="_blank" rel="noopener" style="text-decoration:underline">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
