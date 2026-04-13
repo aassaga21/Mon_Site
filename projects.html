@@ -18,7 +18,7 @@
       <img src="assets/images/Logo_Alexandra_ASSAGA.png" alt="Logo Alexandra Assaga" class="site-logo" />
       <div class="brand-text">
         <div class="brand-name">Alexandra ASSAGA</div>
-        <div class="small muted">Réseau • Cybersécurité • Cloud</div>
+        <div class="small muted">Automatisation, Cloud computing, Infrastructure informatique</div>
       </div>
     </a>
 
@@ -294,7 +294,31 @@
 
 <script src="js/main.js"></script>
 <script>
+  // Année footer
   document.getElementById("year").textContent = new Date().getFullYear();
+
+  // Filtres projets (vue grille)
+  document.addEventListener("DOMContentLoaded", function () {
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const projectItems = document.querySelectorAll(".project-item");
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", function () {
+        // Retire l'état actif de tous les boutons
+        filterBtns.forEach(b => b.classList.remove("is-active"));
+        this.classList.add("is-active");
+
+        const filter = this.getAttribute("data-filter");
+        projectItems.forEach(item => {
+          if (filter === "all" || item.getAttribute("data-tags").includes(filter)) {
+            item.style.display = "";
+          } else {
+            item.style.display = "none";
+          }
+        });
+      });
+    });
+  });
 </script>
 
 </body>
