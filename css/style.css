@@ -28,7 +28,7 @@ body{
 
 a{color:inherit; text-decoration:none}
 img {
-  width: 180px;
+  width: 300px;
   max-width: 100%; /* ne déborde pas sur mobile */
   display: block;
 }
