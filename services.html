@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Services & Spécialités</title>
+  <meta name="description" content="Services et domaines d'expertise d'Alexandra ASSAGA — Infrastructure, Cloud, Automatisation, Cybersécurité." />
+  <link rel="canonical" href="https://aassaga21.github.io/Mon_Site/services.html" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+
+    /* ── Hero services ── */
+    .services-hero{
+      text-align: center;
+      padding: 72px 0 56px;
+      animation: fadeUp .65s ease both;
+    }
+    .services-hero h1{ max-width: 780px; margin: 0 auto 16px; }
+    .services-hero p { max-width: 64ch; margin: 0 auto; }
+
+    /* ── Domaines (4 grandes cartes) ── */
+    .domains{
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+    }
+    .domain-card{
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 32px 28px;
+      background: rgba(255,255,255,.03);
+      position: relative;
+      overflow: hidden;
+      transition: border-color .22s ease, box-shadow .22s ease,
+                  transform .22s ease, background .22s ease;
+    }
+    .domain-card::before{
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      border-radius: 22px 22px 0 0;
+      opacity: 0;
+      transition: opacity .22s ease;
+    }
+    .domain-card:hover{
+      transform: translateY(-4px);
+      background: rgba(255,255,255,.055);
+    }
+    .domain-card:hover::before{ opacity: 1; }
+
+    /* Couleurs par domaine */
+    .domain-card.infra{ --dc: rgba(79,140,255,1); --dc-soft: rgba(79,140,255,.18); }
+    .domain-card.cloud{ --dc: rgba(34,197,94,1);  --dc-soft: rgba(34,197,94,.16);  }
+    .domain-card.auto { --dc: rgba(251,191,36,1); --dc-soft: rgba(251,191,36,.14); }
+    .domain-card.secu { --dc: rgba(239,68,68,1);  --dc-soft: rgba(239,68,68,.14);  }
+
+    .domain-card:hover{ border-color: var(--dc); box-shadow: 0 0 36px var(--dc-soft); }
+    .domain-card::before{ background: var(--dc); }
+
+    .domain-icon{
+      width: 54px; height: 54px;
+      border-radius: 16px;
+      background: var(--dc-soft);
+      border: 1px solid var(--dc);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px;
+      margin-bottom: 18px;
+      transition: box-shadow .22s ease;
+    }
+    .domain-card:hover .domain-icon{
+      box-shadow: 0 0 20px var(--dc-soft);
+    }
+    .domain-card h2{
+      font-size: 20px;
+      margin: 0 0 8px;
+    }
+    .domain-card > p{
+      font-size: 14px;
+      color: var(--muted);
+      margin: 0 0 20px;
+      max-width: none;
+    }
+
+    /* Liste de prestations dans chaque domaine */
+    .service-list{
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .service-list li{
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .service-list li::before{
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--dc);
+      flex-shrink: 0;
+      margin-top: 6px;
+      box-shadow: 0 0 6px var(--dc);
+    }
+    .service-list li strong{ color: var(--text); }
+
+    /* ── Processus de travail ── */
+    .process{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 24px;
+      position: relative;
+    }
+    .process::before{
+      content: '';
+      position: absolute;
+      top: 28px;
+      left: calc(10% + 14px);
+      right: calc(10% + 14px);
+      height: 2px;
+      background: linear-gradient(90deg,
+        rgba(79,140,255,.60),
+        rgba(34,197,94,.50) 50%,
+        rgba(79,140,255,.30));
+      z-index: 0;
+    }
+    .step{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 8px;
+      position: relative;
+      z-index: 1;
+    }
+    .step-num{
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      border: 2px solid rgba(79,140,255,.55);
+      background: var(--bg);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--brand);
+      margin-bottom: 14px;
+      box-shadow: 0 0 20px rgba(79,140,255,.20);
+      transition: border-color .22s, box-shadow .22s, transform .22s;
+    }
+    .step:hover .step-num{
+      border-color: rgba(79,140,255,.90);
+      box-shadow: 0 0 28px rgba(79,140,255,.40);
+      transform: scale(1.08);
+    }
+    .step h3{ font-size: 13px; margin: 0 0 5px; }
+    .step p  { font-size: 12px; color: var(--muted); margin: 0; }
+
+    /* ── Outils & stack ── */
+    .stack-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
+      margin-top: 20px;
+    }
+    .stack-item{
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 14px 16px;
+      background: rgba(255,255,255,.03);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 650;
+      transition: border-color .22s, background .22s, transform .22s;
+    }
+    .stack-item:hover{
+      border-color: rgba(79,140,255,.40);
+      background: rgba(79,140,255,.06);
+      transform: translateY(-2px);
+    }
+    .stack-item span{ font-size: 20px; flex-shrink: 0; }
+
+    /* ── Differentiateurs ── */
+    .diff-grid{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .diff-card{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px 20px;
+      background: rgba(255,255,255,.03);
+      text-align: center;
+      transition: border-color .22s, box-shadow .22s, transform .22s;
+    }
+    .diff-card:hover{
+      border-color: rgba(79,140,255,.35);
+      box-shadow: 0 0 24px rgba(79,140,255,.12);
+      transform: translateY(-3px);
+    }
+    .diff-icon{ font-size: 34px; margin-bottom: 12px; }
+    .diff-card h3{ margin: 0 0 6px; font-size: 15px; }
+    .diff-card p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    /* ── CTA ── */
+    .cta-services{
+      margin-top: 72px;
+      text-align: center;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px){
+      .domains{ grid-template-columns: 1fr; }
+      .process{ grid-template-columns: 1fr 1fr; gap: 18px; }
+      .process::before{ display: none; }
+      .diff-grid{ grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 540px){
+      .process{ grid-template-columns: 1fr; }
+      .diff-grid{ grid-template-columns: 1fr; }
+      .stack-grid{ grid-template-columns: repeat(2, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/images/Logo_Alexandra_ASSAGA.png" alt="Logo Alexandra Assaga" class="site-logo" />
+      <div class="brand-text">
+        <div class="brand-name">Alexandra ASSAGA</div>
+        <div class="small muted">Automatisation, Cloud computing, Infrastructure informatique</div>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a data-nav href="index.html">Accueil</a>
+      <a data-nav href="about.html">À propos</a>
+      <a data-nav href="skills.html">Compétences</a>
+      <a data-nav href="projects.html">Projets</a>
+      <a data-nav href="parcours.html">Parcours</a>
+      <a data-nav href="services.html">Services</a>
+      <a data-nav href="contact.html" class="btn primary">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="services-hero">
+    <div class="container">
+      <div class="kicker">Services &amp; Spécialités</div>
+      <h1>Ce que je peux <span class="hl">concrètement</span> apporter à votre organisation</h1>
+      <p class="muted">
+        Spécialisée en infrastructure, cloud, automatisation et cybersécurité,
+        j'interviens sur des missions ciblées avec une approche structurée :
+        analyse → conception → déploiement → supervision → documentation.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ═══ 4 DOMAINES ═══ -->
+  <section class="section" style="padding-top: 0;">
+    <div class="container">
+
+      <div class="kicker">Domaines d'expertise</div>
+      <h2>Mes 4 domaines de spécialité</h2>
+
+      <div class="domains">
+
+        <!-- 1. Infrastructure -->
+        <div class="domain-card infra">
+          <div class="domain-icon">🖧</div>
+          <h2>Infrastructure &amp; Réseaux</h2>
+          <p>Conception, déploiement et administration d'infrastructures réseau fiables, segmentées et documentées.</p>
+          <ul class="service-list">
+            <li><strong>Conception d'architecture réseau</strong> — topologie, segmentation VLAN, sous-réseaux, routage.</li>
+            <li><strong>Administration de serveurs</strong> — Windows Server, Linux (Ubuntu/Debian), gestion des rôles et services.</li>
+            <li><strong>Virtualisation</strong> — déploiement et gestion de VMs avec VMware, Proxmox ou Hyper-V.</li>
+            <li><strong>Haute disponibilité</strong> — clustering, Live Migration, reprise sur panne, Veeam / Acronis.</li>
+            <li><strong>Téléphonie IP</strong> — installation et configuration de solutions 3CX.</li>
+            <li><strong>Documentation technique</strong> — schémas, procédures, guides d'exploitation exploitables.</li>
+          </ul>
+        </div>
+
+        <!-- 2. Cloud -->
+        <div class="domain-card cloud">
+          <div class="domain-icon">☁️</div>
+          <h2>Cloud Computing</h2>
+          <p>Déploiement et gestion d'infrastructures cloud sur Azure et AWS, avec une approche sécurisée et économique.</p>
+          <ul class="service-list">
+            <li><strong>Azure</strong> — VNet, Virtual Machines, Azure Files SMB, Azure Bastion, Security Groups.</li>
+            <li><strong>AWS</strong> — EC2, RDS MySQL, Security Groups, déploiement d'applications web dynamiques.</li>
+            <li><strong>Architecture cloud sécurisée</strong> — segmentation, accès restreints, gestion des identités.</li>
+            <li><strong>Infrastructure as Code (IaC)</strong> — provisionnement reproductible avec Terraform sur Azure / AWS.</li>
+            <li><strong>Migration vers le cloud</strong> — analyse des besoins, planification et déploiement progressif.</li>
+            <li><strong>Optimisation des coûts</strong> — dimensionnement adapté, nettoyage des ressources inutilisées.</li>
+          </ul>
+        </div>
+
+        <!-- 3. Automatisation -->
+        <div class="domain-card auto">
+          <div class="domain-icon">⚙️</div>
+          <h2>Automatisation &amp; DevOps</h2>
+          <p>Réduction des tâches répétitives, déploiement automatisé et infrastructure reproductible à grande échelle.</p>
+          <ul class="service-list">
+            <li><strong>Terraform</strong> — provisionnement automatique de VMs, réseaux et services cloud.</li>
+            <li><strong>Ansible</strong> — configuration automatique des systèmes, installation de services (Apache, MariaDB…).</li>
+            <li><strong>Proxmox + IaC</strong> — création automatique de machines virtuelles sur hyperviseur.</li>
+            <li><strong>n8n</strong> — automatisation de workflows métier, intégrations entre outils.</li>
+            <li><strong>Scripts Bash / PowerShell</strong> — automatisation de tâches d'administration système.</li>
+            <li><strong>Git &amp; GitHub</strong> — versionnement du code d'infrastructure, collaboration en équipe.</li>
+          </ul>
+        </div>
+
+        <!-- 4. Cybersécurité -->
+        <div class="domain-card secu">
+          <div class="domain-icon">🛡️</div>
+          <h2>Cybersécurité &amp; Réseaux sécurisés</h2>
+          <p>Protection des infrastructures, des données et des accès avec une approche "sécurité by design".</p>
+          <ul class="service-list">
+            <li><strong>Firewall &amp; filtrage</strong> — configuration de règles OPNsense, pfSense, Fortinet (NAT, IPS, filtrage applicatif).</li>
+            <li><strong>VPN</strong> — mise en place de tunnels sécurisés client-to-site et site-to-site (IPsec, OpenVPN).</li>
+            <li><strong>Segmentation réseau</strong> — isolation des zones (LAN, DMZ, WAN), réduction de la surface d'attaque.</li>
+            <li><strong>Durcissement des systèmes</strong> — bonnes pratiques de configuration, réduction des expositions.</li>
+            <li><strong>Supervision sécurité</strong> — surveillance des logs, alertes, tableaux de bord Grafana / Zabbix.</li>
+            <li><strong>Audit &amp; documentation sécurité</strong> — état des lieux, recommandations et plan de remédiation.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ PROCESSUS DE TRAVAIL ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="kicker">Méthode de travail</div>
+      <h2>Comment j'aborde chaque mission</h2>
+      <p class="muted" style="margin-bottom: 40px;">Une approche structurée du besoin à la livraison, pour des résultats fiables et maintenables.</p>
+
+      <div class="process">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Analyse</h3>
+          <p>Comprendre le besoin, l'environnement existant et les contraintes.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Conception</h3>
+          <p>Proposer une architecture claire, sécurisée et adaptée.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Déploiement</h3>
+          <p>Implémenter la solution avec rigueur et tests à chaque étape.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h3>Supervision</h3>
+          <p>Mettre en place la surveillance et les alertes nécessaires.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <h3>Documentation</h3>
+          <p>Livrer une documentation exploitable pour l'équipe en place.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ STACK & OUTILS ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="kicker">Stack technique</div>
+      <h2>Outils &amp; technologies maîtrisés</h2>
+
+      <div class="stack-grid">
+        <div class="stack-item"><span>🟦</span> Azure</div>
+        <div class="stack-item"><span>🟧</span> AWS</div>
+        <div class="stack-item"><span>🟩</span> Terraform</div>
+        <div class="stack-item"><span>🔴</span> Ansible</div>
+        <div class="stack-item"><span>🖥️</span> Proxmox</div>
+        <div class="stack-item"><span>🖥️</span> VMware</div>
+        <div class="stack-item"><span>🖥️</span> Hyper-V</div>
+        <div class="stack-item"><span>🔐</span> OPNsense</div>
+        <div class="stack-item"><span>🔐</span> pfSense</div>
+        <div class="stack-item"><span>🔐</span> Fortinet</div>
+        <div class="stack-item"><span>🔒</span> VPN IPsec</div>
+        <div class="stack-item"><span>📊</span> Grafana</div>
+        <div class="stack-item"><span>📊</span> Zabbix</div>
+        <div class="stack-item"><span>📊</span> Prometheus</div>
+        <div class="stack-item"><span>🤖</span> n8n</div>
+        <div class="stack-item"><span>💾</span> Veeam</div>
+        <div class="stack-item"><span>💾</span> Acronis</div>
+        <div class="stack-item"><span>📞</span> 3CX</div>
+        <div class="stack-item"><span>🐧</span> Linux</div>
+        <div class="stack-item"><span>🪟</span> Windows Server</div>
+        <div class="stack-item"><span>🐙</span> Git / GitHub</div>
+        <div class="stack-item"><span>🐘</span> MySQL / MariaDB</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ CE QUI ME DIFFÉRENCIE ═══ -->
+  <section class="section">
+    <div class="container">
+      <div class="kicker">Pourquoi travailler avec moi</div>
+      <h2>Ce qui me différencie</h2>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <div class="diff-icon">📄</div>
+          <h3>Tout livrable est documenté</h3>
+          <p>Chaque mission se termine avec une documentation claire, réutilisable par l'équipe en place — pas juste du code sans explications.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">🔁</div>
+          <h3>Infrastructure reproductible</h3>
+          <p>J'utilise Terraform et Ansible pour que chaque déploiement puisse être répliqué, versionné et modifié sans risque.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">🛡️</div>
+          <h3>Sécurité intégrée dès le départ</h3>
+          <p>La sécurité n'est pas ajoutée en fin de projet. Segmentation, VPN, firewall et durcissement sont pensés dès la conception.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">📈</div>
+          <h3>Supervision opérationnelle</h3>
+          <p>Je livre des tableaux de bord et des alertes exploitables, pas juste une infrastructure qui "fonctionne" sans visibilité.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">🌍</div>
+          <h3>Expérience internationale</h3>
+          <p>Formation à Genève, participation à un championnat à Dubaï — je suis à l'aise dans des environnements multiculturels et exigeants.</p>
+        </div>
+        <div class="diff-card">
+          <div class="diff-icon">⚡</div>
+          <h3>Apprentissage rapide</h3>
+          <p>2 ans d'expérience terrain acquise en formation intensive. Je m'adapte vite à de nouveaux outils et environnements techniques.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ CTA ═══ -->
+  <section class="section cta-services">
+    <div class="container">
+      <div class="card cta-band" style="padding: 52px 32px; text-align: center;">
+        <div class="kicker" style="text-align: center; margin-bottom: 12px;">Vous avez un besoin ?</div>
+        <h2 style="margin-bottom: 12px; max-width: 640px; margin-inline: auto;">
+          Discutons de votre projet d'infrastructure, cloud ou automatisation.
+        </h2>
+        <p style="max-width: 58ch; margin: 0 auto 28px; color: var(--muted);">
+          Je recherche une alternance à partir de <strong>juillet 2026</strong> sur Genève et ses alentours.
+          Disponible pour échanger sur vos besoins et voir comment je peux contribuer à votre organisation.
+        </p>
+        <div class="hero-cta" style="justify-content: center; margin-top: 0;">
+          <a class="btn primary" href="contact.html">Me contacter</a>
+          <a class="btn success" href="assets/files/CV_Alexandra ASSAGA.pdf" target="_blank" rel="noopener">Télécharger mon CV</a>
+          <a class="btn" href="projects.html">Voir mes réalisations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div>© <span id="year"></span> Alexandra ASSAGA — Portfolio</div>
+    <div class="small">
+      <a href="contact.html" style="text-decoration:underline">Contact</a> •
+      <a href="https://github.com/aassaga21" target="_blank" rel="noopener" style="text-decoration:underline">GitHub</a> •
+      <a href="https://www.linkedin.com/in/alexandra-assaga/" target="_blank" rel="noopener" style="text-decoration:underline">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>
