@@ -1,4 +1,53 @@
-// Active link in navbar depending on current page
+// ── Theme toggle (dark / light) ──
+(function(){
+  var btn  = document.getElementById('themeBtn');
+  var icon = document.getElementById('themeIcon');
+
+  function applyTheme(light){
+    document.body.classList.toggle('light', light);
+    if(icon) icon.textContent = light ? '🌙' : '☀️';
+  }
+
+  // Restore saved preference on every page load
+  applyTheme(localStorage.getItem('theme') === 'light');
+
+  if(btn) btn.addEventListener('click', function(){
+    var isLight = document.body.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    if(icon) icon.textContent = isLight ? '🌙' : '☀️';
+  });
+})();
+
+// ── Language selector ──
+(function(){
+  var btn   = document.getElementById('translateBtn');
+  var panel = document.getElementById('langPanel');
+  if(!btn || !panel) return;
+
+  btn.addEventListener('click', function(e){
+    e.stopPropagation();
+    panel.classList.toggle('open');
+  });
+
+  // Close on outside click
+  document.addEventListener('click', function(){
+    panel.classList.remove('open');
+  });
+  panel.addEventListener('click', function(e){ e.stopPropagation(); });
+
+  // Each language button → open Google Translate in new tab
+  panel.querySelectorAll('.lang-opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      var lang = b.getAttribute('data-lang');
+      var url  = 'https://translate.google.com/translate?sl=fr&tl='
+                 + lang + '&u=' + encodeURIComponent(location.href);
+      window.open(url, '_blank', 'noopener');
+      panel.classList.remove('open');
+    });
+  });
+})();
+
+// ── Active link in navbar depending on current page
 (() => {
   const path = (location.pathname.split("/").pop() || "index.html").toLowerCase();
   document.querySelectorAll("[data-nav]").forEach(a => {
