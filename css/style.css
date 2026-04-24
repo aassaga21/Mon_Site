@@ -84,7 +84,7 @@ header .container.nav{
 .brand-name{ font-weight:800; color: var(--text); }
 
 .site-logo{
-  height:46px;
+  height:80px;
   width:auto;
   object-fit:contain;
 }
