@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio — Parcours & Ambitions</title>
+  <meta name="description" content="Parcours, formation, certifications et ambitions d'Alexandra ASSAGA — Infrastructure, Cloud, Cybersécurité." />
+  <link rel="canonical" href="https://aassaga21.github.io/Mon_porfolio/parcours.html" />
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Disponibilité banner ── */
+    .avail-banner{
+      background: linear-gradient(90deg, rgba(34,197,94,.18), rgba(79,140,255,.14));
+      border: 1px solid rgba(34,197,94,.35);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 36px;
+      animation: fadeUp .5s ease both;
+    }
+    .avail-dot{
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34,197,94,.5);
+      animation: pulse-ring 2s infinite;
+    }
+    .avail-banner strong{ color: #22c55e; }
+
+    /* ── Timeline ── */
+    .timeline{
+      position: relative;
+      padding: 10px 0 0;
+    }
+    .timeline::before{
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 2px;
+      background: linear-gradient(180deg,
+        rgba(79,140,255,.70),
+        rgba(34,197,94,.55) 60%,
+        rgba(255,255,255,.10));
+      transform: translateX(-50%);
+    }
+
+    .tl-item{
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      gap: 0 10px;
+      margin-bottom: 48px;
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .55s ease, transform .55s ease;
+    }
+    .tl-item.visible{ opacity:1; transform:translateY(0); }
+
+    /* Côté gauche */
+    .tl-item:nth-child(odd) .tl-card  { grid-column: 1; text-align: right; }
+    .tl-item:nth-child(odd) .tl-spacer{ grid-column: 2; }
+    .tl-item:nth-child(odd) .tl-empty { grid-column: 3; }
+
+    /* Côté droit */
+    .tl-item:nth-child(even) .tl-empty { grid-column: 1; }
+    .tl-item:nth-child(even) .tl-spacer{ grid-column: 2; }
+    .tl-item:nth-child(even) .tl-card  { grid-column: 3; text-align: left; }
+
+    .tl-spacer{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+    .tl-icon{
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(79,140,255,.60);
+      background: rgba(11,18,32,.95);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      box-shadow: 0 0 20px rgba(79,140,255,.30);
+      z-index: 1;
+    }
+    .tl-icon.green{
+      border-color: rgba(34,197,94,.60);
+      box-shadow: 0 0 20px rgba(34,197,94,.25);
+    }
+
+    .tl-card{
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 18px;
+      padding: 20px 22px;
+      transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease, background .22s ease;
+      cursor: default;
+    }
+    .tl-card:hover{
+      border-color: rgba(79,140,255,.40);
+      box-shadow: 0 0 28px rgba(79,140,255,.18);
+      transform: translateY(-3px);
+      background: rgba(255,255,255,.06);
+    }
+    .tl-date{
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--brand);
+      margin-bottom: 6px;
+    }
+    .tl-card h3{ margin: 0 0 6px; font-size: 16px; }
+    .tl-card p { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
+
+    /* ── Certifications ── */
+    .cert-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .cert-card{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      background: rgba(255,255,255,.03);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color .22s, box-shadow .22s, transform .22s, background .22s;
+    }
+    .cert-card:hover{
+      border-color: rgba(79,140,255,.40);
+      box-shadow: 0 0 24px rgba(79,140,255,.15);
+      transform: translateY(-3px);
+      background: rgba(79,140,255,.05);
+    }
+    .cert-icon{
+      font-size: 30px;
+      line-height: 1;
+    }
+    .cert-card h3{ margin: 0; font-size: 15px; }
+    .cert-card p { margin: 0; font-size: 13px; color: var(--muted); }
+    .cert-status{
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 999px;
+      width: fit-content;
+    }
+    .cert-status.done{
+      background: rgba(34,197,94,.14);
+      border: 1px solid rgba(34,197,94,.35);
+      color: #22c55e;
+    }
+    .cert-status.progress{
+      background: rgba(79,140,255,.14);
+      border: 1px solid rgba(79,140,255,.35);
+      color: #4f8cff;
+    }
+    .cert-status.planned{
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--muted);
+    }
+
+    /* ── Valeurs ── */
+    .values-grid{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .value-card{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 20px;
+      background: rgba(255,255,255,.03);
+      text-align: center;
+      transition: border-color .22s, box-shadow .22s, transform .22s;
+    }
+    .value-card:hover{
+      border-color: rgba(34,197,94,.35);
+      box-shadow: 0 0 24px rgba(34,197,94,.12);
+      transform: translateY(-3px);
+    }
+    .value-icon{ font-size: 36px; margin-bottom: 10px; }
+    .value-card h3{ margin: 0 0 6px; font-size: 15px; }
+    .value-card p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    /* ── Roadmap ── */
+    .roadmap{
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+      counter-reset: step;
+    }
+    .road-step{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px;
+      background: rgba(255,255,255,.03);
+      position: relative;
+      transition: border-color .22s, box-shadow .22s, transform .22s, background .22s;
+    }
+    .road-step:hover{
+      border-color: rgba(79,140,255,.40);
+      box-shadow: 0 0 28px rgba(79,140,255,.18);
+      transform: translateY(-3px);
+      background: rgba(79,140,255,.05);
+    }
+    .road-step::before{
+      counter-increment: step;
+      content: "0" counter(step);
+      font-size: 38px;
+      font-weight: 900;
+      background: linear-gradient(135deg, rgba(79,140,255,.25), rgba(34,197,94,.20));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      display: block;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .road-step h3{ margin: 0 0 6px; font-size: 15px; }
+    .road-step p { margin: 0; font-size: 13px; color: var(--muted); }
+
+    /* ── Responsive timeline ── */
+    @media (max-width: 700px){
+      .timeline::before{ left: 22px; }
+      .tl-item{
+        grid-template-columns: 54px 1fr;
+        grid-template-rows: auto;
+      }
+      .tl-item:nth-child(odd) .tl-card,
+      .tl-item:nth-child(even) .tl-card{
+        grid-column: 2;
+        grid-row: 1;
+        text-align: left;
+      }
+      .tl-item:nth-child(odd) .tl-spacer,
+      .tl-item:nth-child(even) .tl-spacer{
+        grid-column: 1;
+        grid-row: 1;
+      }
+      .tl-empty{ display: none; }
+      .roadmap{ grid-template-columns: 1fr; }
+    }
+    @media (max-width: 500px){
+      .cert-grid{ grid-template-columns: 1fr; }
+      .values-grid{ grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/images/Logo_Alexandra_ASSAGA.png" alt="Logo Alexandra Assaga" class="site-logo" />
+      <div class="brand-text">
+        <div class="brand-name">Alexandra ASSAGA</div>
+        <div class="small muted">Automatisation, Cloud computing, Infrastructure informatique</div>
+      </div>
+    </a>
+    <nav class="nav-links" aria-label="Navigation principale">
+      <a data-nav href="index.html">Accueil</a>
+      <a data-nav href="about.html">À propos</a>
+      <a data-nav href="skills.html">Compétences</a>
+      <a data-nav href="projects.html">Projets</a>
+      <a data-nav href="parcours.html">Parcours</a>
+      <a data-nav href="contact.html" class="btn primary">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="section">
+  <div class="container">
+
+    <!-- ═══ INTRO ═══ -->
+    <div class="avail-banner">
+      <span class="avail-dot"></span>
+      <span><strong>Disponible</strong> — À la recherche d'un stage ou poste junior en infrastructure, cloud ou cybersécurité · Genève &amp; région</span>
+    </div>
+
+    <div class="kicker">Parcours &amp; Ambitions</div>
+    <h1 style="max-width:800px">
+      Une trajectoire construite pas à pas, <span class="hl">avec méthode</span>.
+    </h1>
+    <p style="max-width: 70ch; margin-bottom: 48px;">
+      Chaque étape de mon parcours m'a appris quelque chose de concret — à comprendre un besoin,
+      à concevoir une solution robuste, puis à la livrer avec documentation et supervision.
+      Voici mon histoire et où je vais.
+    </p>
+
+    <!-- ═══ TIMELINE ═══ -->
+    <h2 style="margin-bottom: 8px;">Ma trajectoire</h2>
+    <p style="margin-bottom: 36px; color: var(--muted);">Formation, expériences et projets marquants.</p>
+
+    <div class="timeline" id="timeline">
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-date">2021 — 2023</div>
+          <h3>Baccalauréat professionnel SEN</h3>
+          <p>Systèmes Électroniques Numériques — premières bases en réseaux, câblage et systèmes embarqués. Découverte de la logique d'infrastructure.</p>
+          <div class="badges" style="justify-content: flex-end">
+            <span class="badge">Réseaux</span>
+            <span class="badge">Systèmes</span>
+          </div>
+        </div>
+        <div class="tl-spacer">
+          <div class="tl-icon">🎓</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-empty"></div>
+        <div class="tl-spacer">
+          <div class="tl-icon green">🚀</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-date">Sept. 2023</div>
+          <h3>Entrée en Bachelor — ESTIAM / Geneva Institute of Technology</h3>
+          <p>Spécialisation <strong>Automatisation, Cloud computing &amp; Infrastructure informatique</strong>. Immersion dans un environnement technique exigeant et international à Genève.</p>
+          <div class="badges">
+            <span class="badge">Virtualisation</span>
+            <span class="badge">Cloud</span>
+            <span class="badge">Réseau</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-date">2024</div>
+          <h3>TP Cloud Azure — infrastructure sécurisée</h3>
+          <p>Déploiement d'une architecture cloud : VNet segmenté, VMs Linux, Azure Files SMB, accès administrateur via Azure Bastion. Première expérience IaC.</p>
+          <div class="badges" style="justify-content: flex-end">
+            <span class="badge">Azure</span>
+            <span class="badge">VNet</span>
+            <span class="badge">Bastion</span>
+          </div>
+        </div>
+        <div class="tl-spacer">
+          <div class="tl-icon">☁️</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-empty"></div>
+        <div class="tl-spacer">
+          <div class="tl-icon">🖥️</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-date">2024</div>
+          <h3>Virtualisation &amp; supervision Hyper-V</h3>
+          <p>Mise en place de clusters Hyper-V avec HA et Live Migration, tableaux de bord Prometheus + Grafana avec alerting opérationnel.</p>
+          <div class="badges">
+            <span class="badge">Hyper-V</span>
+            <span class="badge">Prometheus</span>
+            <span class="badge">Grafana</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-date">Janv. 2025</div>
+          <h3>Hackathon NoCode 2025 — 🏆 Infrastructure multi-sites</h3>
+          <p>En équipe, conception et déploiement d'une infrastructure complète : VPN IPsec site-to-site (Fortinet), segmentation réseau, Proxmox, NAS. Livré en conditions réelles sous contrainte de temps.</p>
+          <div class="badges" style="justify-content: flex-end">
+            <span class="badge">Fortinet</span>
+            <span class="badge">VPN IPsec</span>
+            <span class="badge">Proxmox</span>
+            <span class="badge">NAS</span>
+          </div>
+        </div>
+        <div class="tl-spacer">
+          <div class="tl-icon green">🏆</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-empty"></div>
+        <div class="tl-spacer">
+          <div class="tl-icon">⚙️</div>
+        </div>
+        <div class="tl-card">
+          <div class="tl-date">2025</div>
+          <h3>Automatisation IaC — Terraform &amp; Ansible</h3>
+          <p>Provisionnement d'environnements reproductibles avec Terraform, configuration automatisée des systèmes via Ansible. Objectif : infrastructure as code maintenable.</p>
+          <div class="badges">
+            <span class="badge">Terraform</span>
+            <span class="badge">Ansible</span>
+            <span class="badge">n8n</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-card">
+          <div class="tl-date">Aujourd'hui — B2</div>
+          <h3>En cours · Bachelor 2ème année</h3>
+          <p>Approfondissement de la cybersécurité, du scripting avancé et de l'automatisation. Projets académiques et personnels en parallèle. Portfolio en constante évolution.</p>
+          <div class="badges" style="justify-content: flex-end">
+            <span class="badge">Cybersécurité</span>
+            <span class="badge">Scripting</span>
+            <span class="badge">Documentation</span>
+          </div>
+        </div>
+        <div class="tl-spacer">
+          <div class="tl-icon green">📍</div>
+        </div>
+        <div class="tl-empty"></div>
+      </div>
+
+    </div>
+    <!-- /timeline -->
+
+
+    <!-- ═══ CERTIFICATIONS ═══ -->
+    <div style="margin-top: 72px;">
+      <div class="kicker">Certifications</div>
+      <h2>Formations &amp; reconnaissances</h2>
+      <p style="color: var(--muted);">Les certifications que je prépare et celles que je vise à court terme.</p>
+
+      <div class="cert-grid">
+
+        <div class="cert-card">
+          <div class="cert-icon">🟦</div>
+          <div>
+            <h3>Microsoft AZ-900</h3>
+            <p>Azure Fundamentals — bases du cloud Azure, services, sécurité et conformité.</p>
+          </div>
+          <div class="cert-status progress">En préparation</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🌐</div>
+          <div>
+            <h3>CompTIA Network+</h3>
+            <p>Fondamentaux des réseaux, protocoles, dépannage et sécurité réseau.</p>
+          </div>
+          <div class="cert-status progress">En préparation</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🔐</div>
+          <div>
+            <h3>CompTIA Security+</h3>
+            <p>Cybersécurité opérationnelle, gestion des risques, cryptographie.</p>
+          </div>
+          <div class="cert-status planned">Objectif 2025–2026</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🟧</div>
+          <div>
+            <h3>HashiCorp Terraform Associate</h3>
+            <p>Infrastructure as Code — provisionnement et gestion d'infrastructure cloud.</p>
+          </div>
+          <div class="cert-status planned">Objectif 2026</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🐧</div>
+          <div>
+            <h3>Linux Foundation LFCS</h3>
+            <p>Administration système Linux — certification fondamentale pour l'infrastructure.</p>
+          </div>
+          <div class="cert-status planned">Objectif 2026</div>
+        </div>
+
+        <div class="cert-card">
+          <div class="cert-icon">🤖</div>
+          <div>
+            <h3>Red Hat Ansible Automation</h3>
+            <p>Automatisation d'infrastructure avec Ansible — DO407 / EX407.</p>
+          </div>
+          <div class="cert-status planned">Objectif 2026</div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ═══ VALEURS ═══ -->
+    <div style="margin-top: 72px;">
+      <div class="kicker">Ce qui me définit</div>
+      <h2>Mes valeurs de travail</h2>
+      <p style="color: var(--muted);">Les principes que j'applique à chaque projet.</p>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🔍</div>
+          <h3>Comprendre avant d'agir</h3>
+          <p>Je lis la documentation, j'analyse le besoin et je pose les bonnes questions avant de toucher quoi que ce soit.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">📄</div>
+          <h3>Tout documenter</h3>
+          <p>Chaque projet se termine avec une documentation exploitable — pas juste pour moi, mais pour celle ou celui qui reprend après.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🛡️</div>
+          <h3>Sécurité by design</h3>
+          <p>La sécurité n'est pas une couche ajoutée en fin de projet. Elle est intégrée dès la conception.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔄</div>
+          <h3>Amélioration continue</h3>
+          <p>Je regarde ce qui pourrait être automatisé, supervisé ou simplifié — et je propose des améliorations concrètes.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <h3>Travail d'équipe</h3>
+          <p>Mes meilleurs projets ont été réalisés en équipe. Je suis à l'aise aussi bien en autonomie qu'en collaboration.</p>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">📈</div>
+          <h3>Curiosité technique</h3>
+          <p>Je fais de la veille régulièrement et je teste de nouveaux outils dans mon lab pour ne pas rester figée dans mes acquis.</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ ROADMAP ═══ -->
+    <div style="margin-top: 72px;">
+      <div class="kicker">Roadmap</div>
+      <h2>Où je vais</h2>
+      <p style="color: var(--muted); margin-bottom: 4px;">Ma trajectoire professionnelle à court, moyen et long terme.</p>
+
+      <div class="roadmap">
+        <div class="road-step">
+          <h3>Stage / Junior — maintenant</h3>
+          <p>Rejoindre une équipe infrastructure, cloud ou sécurité pour mettre mes compétences en pratique sur de vrais projets de production. Contribuer, apprendre, livrer.</p>
+          <div class="badges" style="margin-top: 12px;">
+            <span class="badge">Infrastructure</span>
+            <span class="badge">Cloud</span>
+            <span class="badge">Cybersécurité</span>
+          </div>
+        </div>
+
+        <div class="road-step">
+          <h3>Ingénieure confirmée — 2–3 ans</h3>
+          <p>Approfondir l'IaC, la CI/CD pour l'infrastructure, la sécurité offensive/défensive, et monter en compétences sur des architectures cloud hybrides complexes.</p>
+          <div class="badges" style="margin-top: 12px;">
+            <span class="badge">IaC avancé</span>
+            <span class="badge">DevSecOps</span>
+            <span class="badge">Hybride cloud</span>
+          </div>
+        </div>
+
+        <div class="road-step">
+          <h3>Architecte infrastructure — 5 ans</h3>
+          <p>Concevoir des infrastructures à grande échelle, fiables et résilientes. Participer aux décisions stratégiques d'une organisation sur l'infrastructure et la sécurité.</p>
+          <div class="badges" style="margin-top: 12px;">
+            <span class="badge">Architecture</span>
+            <span class="badge">Résilience</span>
+            <span class="badge">Leadership tech</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══ CTA ═══ -->
+    <div style="margin-top: 72px;">
+      <div class="card cta-band" style="text-align: center; padding: 48px 32px;">
+        <div class="avail-dot" style="margin: 0 auto 16px;"></div>
+        <h2 style="margin-bottom: 10px;">Je suis disponible dès maintenant.</h2>
+        <p style="max-width: 60ch; margin: 0 auto 22px;">
+          Si vous cherchez un profil motivé, rigoureux et en constante progression sur des sujets
+          <strong>infrastructure, cloud et cybersécurité</strong> — parlons-en.
+        </p>
+        <div class="hero-cta" style="justify-content: center; margin-top: 0;">
+          <a class="btn primary" href="contact.html">Me contacter</a>
+          <a class="btn success" href="assets/files/CV_Alexandra ASSAGA.pdf" target="_blank" rel="noopener">Télécharger mon CV</a>
+          <a class="btn" href="projects.html">Voir mes projets</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="container footer-row">
+    <div>© <span id="year"></span> Alexandra ASSAGA — Portfolio</div>
+    <div class="small">
+      <a href="contact.html" style="text-decoration:underline">Contact</a> •
+      <a href="https://github.com/aassaga21" target="_blank" rel="noopener" style="text-decoration:underline">GitHub</a> •
+      <a href="https://www.linkedin.com/in/alexandra-assaga/" target="_blank" rel="noopener" style="text-decoration:underline">LinkedIn</a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* ── Intersection Observer : animate timeline items on scroll ── */
+  const items = document.querySelectorAll(".tl-item");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add("visible"); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.15 });
+  items.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
