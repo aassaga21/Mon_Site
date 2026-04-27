@@ -1,22 +1,36 @@
-// ── Hide Google Translate toolbar (injected as iframe + inline body.style.top) ──
+// ── Hide Google Translate toolbar ──
+// GT injects an iframe with z-index:2147483647 and mutates body.style.top.
+// We remove the iframe from the DOM the moment it appears (translation still works).
 (function(){
-  function hideGTBar(){
-    // Hide the injected iframe banner
-    document.querySelectorAll('.goog-te-banner-frame, #goog-gt-tt, .goog-te-spinner-pos').forEach(function(el){
-      el.style.setProperty('display','none','important');
-      el.style.setProperty('height','0','important');
+  var busy = false;
+
+  function killGTBar(){
+    if(busy) return;
+    busy = true;
+
+    // Remove the toolbar iframe entirely (translation text nodes are set by the main GT script, not the iframe)
+    document.querySelectorAll('.goog-te-banner-frame, #goog-gt-tt').forEach(function(el){
+      if(el.parentNode) el.parentNode.removeChild(el);
     });
-    // Reset body top that GT sets as inline style
+
+    // Reset the body.top that GT injects as inline style
     if(document.body && document.body.style.top && document.body.style.top !== '0px'){
       document.body.style.top = '0px';
     }
+
+    busy = false;
   }
-  // Watch for GT DOM injections
-  new MutationObserver(hideGTBar).observe(document.documentElement, {
+
+  // MutationObserver — fires on every DOM change
+  new MutationObserver(killGTBar).observe(document.documentElement, {
     childList: true, subtree: true,
-    attributes: true, attributeFilter: ['style','class']
+    attributes: true, attributeFilter: ['style']
   });
-  window.addEventListener('load', hideGTBar);
+
+  // setInterval as a safety net (50 ms)
+  setInterval(killGTBar, 50);
+
+  window.addEventListener('load', killGTBar);
 })();
 
 // ── Theme toggle (dark / light) ──
