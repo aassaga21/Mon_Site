@@ -18,7 +18,7 @@
   });
 })();
 
-// ── Language selector ──
+// ── Language selector (Google Translate widget — in-page, no popup) ──
 (function(){
   var btn   = document.getElementById('translateBtn');
   var panel = document.getElementById('langPanel');
@@ -29,23 +29,35 @@
     panel.classList.toggle('open');
   });
 
-  // Close on outside click
   document.addEventListener('click', function(){
     panel.classList.remove('open');
   });
   panel.addEventListener('click', function(e){ e.stopPropagation(); });
 
-  // Each language button → open Google Translate in new tab
   panel.querySelectorAll('.lang-opt').forEach(function(b){
     b.addEventListener('click', function(){
       var lang = b.getAttribute('data-lang');
-      var url  = 'https://translate.google.com/translate?sl=fr&tl='
-                 + lang + '&u=' + encodeURIComponent(location.href);
-      window.open(url, '_blank', 'noopener');
+      doTranslate(lang);
       panel.classList.remove('open');
     });
   });
 })();
+
+function doTranslate(lang){
+  if(lang === 'fr'){
+    // Restore original: clear the googtrans cookie then reload
+    var exp = new Date(0).toUTCString();
+    document.cookie = 'googtrans=; expires=' + exp + '; path=/';
+    document.cookie = 'googtrans=; expires=' + exp + '; domain=' + location.hostname + '; path=/';
+    window.location.reload();
+    return;
+  }
+  var combo = document.querySelector('.goog-te-combo');
+  if(combo){
+    combo.value = lang;
+    combo.dispatchEvent(new Event('change'));
+  }
+}
 
 // ── Active link in navbar depending on current page
 (() => {

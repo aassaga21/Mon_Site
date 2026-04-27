@@ -12,6 +12,27 @@
 </head>
 <body>
 
+<!-- ── Top bar ── -->
+<div class="top-bar">
+  <div class="translate-wrap">
+    <button class="ctrl-btn" id="translateBtn" aria-label="Changer la langue">Traduire</button>
+    <div class="lang-panel" id="langPanel">
+      <button class="lang-opt" data-lang="fr">Fran&ccedil;ais (original)</button>
+      <button class="lang-opt" data-lang="en">English</button>
+      <button class="lang-opt" data-lang="de">Deutsch</button>
+      <button class="lang-opt" data-lang="es">Espa&ntilde;ol</button>
+      <button class="lang-opt" data-lang="it">Italiano</button>
+      <button class="lang-opt" data-lang="pt">Portugu&ecirc;s</button>
+      <button class="lang-opt" data-lang="nl">Nederlands</button>
+      <button class="lang-opt" data-lang="ar">&#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</button>
+      <button class="lang-opt" data-lang="zh-CN">&#20013;&#25991;</button>
+      <button class="lang-opt" data-lang="ja">&#26085;&#26412;&#35486;</button>
+      <button class="lang-opt" data-lang="ru">&#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
+    </div>
+  </div>
+  <button class="ctrl-btn theme-btn" id="themeBtn" aria-label="Changer le th&egrave;me"><span id="themeIcon"></span></button>
+</div>
+
 <header class="site-header">
   <div class="container nav">
     <a class="brand" href="index.html" aria-label="Retour à l'accueil">
@@ -255,24 +276,6 @@
   <div class="container footer-row">
     <div class="small muted">&copy; <span id="year"></span> Alexandra ASSAGA &mdash; Tous droits r&eacute;serv&eacute;s</div>
 
-    <div class="footer-controls">
-      <div class="translate-wrap">
-        <button class="ctrl-btn" id="translateBtn" aria-label="Changer la langue">&#127760; Traduire</button>
-        <div class="lang-panel" id="langPanel">
-          <button class="lang-opt" data-lang="en">&#127468;&#127463; English</button>
-          <button class="lang-opt" data-lang="de">&#127465;&#127466; Deutsch</button>
-          <button class="lang-opt" data-lang="es">&#127466;&#127480; Espa&ntilde;ol</button>
-          <button class="lang-opt" data-lang="it">&#127470;&#127481; Italiano</button>
-          <button class="lang-opt" data-lang="pt">&#127477;&#127481; Portugu&ecirc;s</button>
-          <button class="lang-opt" data-lang="nl">&#127475;&#127473; Nederlands</button>
-          <button class="lang-opt" data-lang="ar">&#127480;&#127462; &#1575;&#1604;&#1593;&#1585;&#1576;&#1610;&#1577;</button>
-          <button class="lang-opt" data-lang="zh-CN">&#127464;&#127475; &#20013;&#25991;</button>
-          <button class="lang-opt" data-lang="ja">&#127471;&#127477; &#26085;&#26412;&#35486;</button>
-          <button class="lang-opt" data-lang="ru">&#127479;&#127482; &#1056;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;</button>
-        </div>
-      </div>
-      <button class="ctrl-btn theme-btn" id="themeBtn" aria-label="Changer le th&egrave;me"><span id="themeIcon">&#9728;&#65039;</span></button>
-    </div>
 
     <div class="small">
       <a href="contact.html" style="text-decoration:underline">Contact</a> &bull;
@@ -311,5 +314,8 @@
   });
 </script>
 
+<div id="google_translate_element" aria-hidden="true" style="display:none;position:absolute;"></div>
+<script>function googleTranslateElementInit(){new google.translate.TranslateElement({pageLanguage:'fr',includedLanguages:'en,de,es,it,pt,nl,ar,zh-CN,ja,ru',autoDisplay:false},'google_translate_element');}</script>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
 </body>
 </html>

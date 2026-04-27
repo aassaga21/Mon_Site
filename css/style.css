@@ -79,9 +79,30 @@ img{ max-width: 100%; display: block; }
 /* ============================================================
    HEADER / NAV
    ============================================================ */
-header{
+/* ── Top control bar (above nav) ── */
+.top-bar{
   position: sticky;
   top: 0;
+  z-index: 51;
+  background: rgba(5,10,20,.88);
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 20px;
+}
+
+/* Hide Google Translate default toolbar */
+.goog-te-banner-frame{ display:none !important; }
+#google_translate_element{ display:none !important; }
+body{ top:0 !important; }
+
+header{
+  position: sticky;
+  top: 48px;   /* height of .top-bar */
   z-index: 50;
   -webkit-backdrop-filter: blur(18px) saturate(160%);
   backdrop-filter: blur(18px) saturate(160%);
@@ -528,7 +549,6 @@ footer{
   position: absolute;
   bottom: calc(100% + 10px);
   left: 50%;
-  transform: translateX(-50%);
   background: #0e1829;
   border: 1px solid rgba(79,140,255,.30);
   border-radius: 16px;
@@ -536,7 +556,7 @@ footer{
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4px;
-  min-width: 240px;
+  min-width: 260px;
   box-shadow: 0 20px 50px rgba(0,0,0,.55);
   opacity: 0;
   pointer-events: none;
@@ -548,6 +568,18 @@ footer{
   opacity: 1;
   pointer-events: all;
   transform: translateX(-50%) translateY(0);
+}
+
+/* Top-bar: panel opens downward, aligned to the right */
+.top-bar .lang-panel{
+  bottom: auto;
+  top: calc(100% + 8px);
+  left: auto;
+  right: 0;
+  transform: translateY(-6px);
+}
+.top-bar .lang-panel.open{
+  transform: translateY(0);
 }
 .lang-opt{
   display: flex;
@@ -606,6 +638,10 @@ body.light .card:hover{
   background: rgba(255,255,255,.95);
   border-color: rgba(79,140,255,.28);
   box-shadow: 0 8px 28px rgba(79,140,255,.14);
+}
+body.light .top-bar{
+  background: rgba(240,244,255,.92);
+  border-bottom-color: rgba(15,23,42,.10);
 }
 body.light footer{
   background: rgba(255,255,255,.55);
