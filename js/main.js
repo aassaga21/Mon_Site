@@ -1,3 +1,24 @@
+// ── Hide Google Translate toolbar (injected as iframe + inline body.style.top) ──
+(function(){
+  function hideGTBar(){
+    // Hide the injected iframe banner
+    document.querySelectorAll('.goog-te-banner-frame, #goog-gt-tt, .goog-te-spinner-pos').forEach(function(el){
+      el.style.setProperty('display','none','important');
+      el.style.setProperty('height','0','important');
+    });
+    // Reset body top that GT sets as inline style
+    if(document.body && document.body.style.top && document.body.style.top !== '0px'){
+      document.body.style.top = '0px';
+    }
+  }
+  // Watch for GT DOM injections
+  new MutationObserver(hideGTBar).observe(document.documentElement, {
+    childList: true, subtree: true,
+    attributes: true, attributeFilter: ['style','class']
+  });
+  window.addEventListener('load', hideGTBar);
+})();
+
 // ── Theme toggle (dark / light) ──
 (function(){
   var btn  = document.getElementById('themeBtn');

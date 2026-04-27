@@ -96,9 +96,13 @@ img{ max-width: 100%; display: block; }
 }
 
 /* Hide Google Translate default toolbar */
-.goog-te-banner-frame{ display:none !important; }
-#google_translate_element{ display:none !important; }
-body{ top:0 !important; }
+iframe.goog-te-banner-frame,
+.goog-te-banner-frame,
+#goog-gt-tt,
+.goog-te-spinner-pos { display:none !important; height:0 !important; }
+#google_translate_element { display:none !important; }
+/* Override inline body.top that GT injects */
+body { top:0 !important; margin-top:0 !important; }
 
 header{
   position: sticky;
