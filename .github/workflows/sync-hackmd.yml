@@ -1,0 +1,40 @@
+name: Sync HackMD Projects
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'   # toutes les 6 heures
+  workflow_dispatch:          # déclenchement manuel depuis l'onglet Actions
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Synchroniser les projets HackMD
+        env:
+          HACKMD_API_TOKEN: ${{ secrets.HACKMD_API_TOKEN }}
+          # HACKMD_TAG: portfolio   # décommenter pour changer le tag de filtre
+        run: node scripts/sync-hackmd.js
+
+      - name: Commiter si des changements ont eu lieu
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add projects.html
+          if git diff --staged --quiet; then
+            echo "Aucun changement détecté, rien à commiter."
+          else
+            git commit -m "chore: sync HackMD projects [skip ci]"
+            git push
+          fi
